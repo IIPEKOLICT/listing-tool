@@ -1,0 +1,31 @@
+{
+  "name": "listing-tool",
+  "version": "1.0.0",
+  "description": "NodeJS tool for easy create listings of code",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IIPEKOLICT/listing-tool.git"
+  },
+  "keywords": [],
+  "author": "Evgenii Scherbakov <iipekolict@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IIPEKOLICT/listing-tool/issues"
+  },
+  "homepage": "https://github.com/IIPEKOLICT/listing-tool#readme",
+  "engines": {
+    "node": "16.x"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.41",
+    "prettier": "2.6.2"
+  },
+  "dependencies": {
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  }
+}
