@@ -1,0 +1,24 @@
+{
+  "params": [
+    {
+      "root": "/home/iipekolict/github/hotel-jvm-client/app/src",
+      "output": "listing.ts",
+      "comment": {
+        "enabled": true,
+        "start": "// path: ",
+        "end": ""
+      },
+      "paddings": 1,
+      "encoding": "utf8",
+      "strict": false,
+      "ignore": {
+        "items": [],
+        "extensions": []
+      },
+      "only": {
+        "items": [],
+        "extensions": []
+      }
+    }
+  ]
+}
