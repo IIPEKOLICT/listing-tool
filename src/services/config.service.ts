@@ -23,6 +23,7 @@ export default class ConfigService implements IConfigService {
     try {
       const configFileData: string = await this.file.read(SETTINGS_FILE_PATH);
 
+      console.log(`Load configuration from settings.json...`);
       this.params = ((JSON.parse(configFileData) as PartialConfig).params || []).map(
         (listingParams: PartialListingParams) => ConfigService.parseListingParams(listingParams)
       );

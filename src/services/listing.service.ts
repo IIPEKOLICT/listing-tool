@@ -11,6 +11,7 @@ export default class ListingService implements IListingService {
   constructor(private readonly fileService: IFileService) {}
 
   setParams(params: ListingParams): IListingService {
+    console.log(`Preparing ${params.output} listing config...`);
     this.params = params;
     return this;
   }
@@ -35,8 +36,11 @@ export default class ListingService implements IListingService {
   }
 
   private async getFileContent(path: string): Promise<string> {
+    const pathWithoutRoot: string = path.replace(this.params.root, '');
     let data: string = await this.fileService.read(path, this.params.encoding);
     let divider: string = '';
+
+    console.log(`Coping ${pathWithoutRoot} file content...`);
 
     for (let i = 0; i <= this.params.paddings; i++) {
       divider += '\n';
@@ -45,7 +49,7 @@ export default class ListingService implements IListingService {
     if (this.params.comment.enabled) {
       return (
         this.params.comment.start +
-        path.replace(this.params.root, '') +
+        pathWithoutRoot +
         this.params.comment.end +
         divider +
         data +
@@ -101,5 +105,7 @@ export default class ListingService implements IListingService {
     await this.deleteOldListing();
     await this.fileService.write(join(DIST_PATH, this.params.output), this.params.encoding, '');
     await this.investigate(this.params.root);
+
+    console.log(`Listing ${this.params.output} successfully created...`);
   }
 }

@@ -11,4 +11,6 @@ const listingService: IListingService = new ListingService(fileService);
   for (const listingParams of configService.getParams()) {
     await listingService.setParams(listingParams).create();
   }
+
+  console.log('Done! Open dist folder and see your listings!');
 })();
