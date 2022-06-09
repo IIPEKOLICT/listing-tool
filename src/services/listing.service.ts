@@ -3,6 +3,7 @@ import { ListingParams } from '../shared/types';
 import { DEFAULT_LISTING_PARAMS, DIST_PATH } from '../shared/constants';
 import { readdir, rm, mkdir, lstat } from 'fs/promises';
 import { join, extname, basename } from 'path';
+import { isBinaryFile } from 'isbinaryfile';
 
 export default class ListingService implements IListingService {
   private params: ListingParams = DEFAULT_LISTING_PARAMS;
@@ -43,7 +44,12 @@ export default class ListingService implements IListingService {
 
     if (this.params.comment.enabled) {
       return (
-        this.params.comment.mark + path.replace(this.params.root, '') + divider + data + divider
+        this.params.comment.start +
+        path.replace(this.params.root, '') +
+        this.params.comment.end +
+        divider +
+        data +
+        divider
       );
     }
 
@@ -56,17 +62,20 @@ export default class ListingService implements IListingService {
     for (const item of items) {
       const itemPath: string = join(path, item);
 
-      if (this.checkFile(itemPath)) {
-        if ((await lstat(itemPath)).isDirectory()) {
-          await this.investigate(itemPath);
-        } else {
-          await this.fileService.append(
-            join(DIST_PATH, this.params.output),
-            this.params.encoding,
-            await this.getFileContent(itemPath)
-          );
-        }
+      if (!this.checkFile(itemPath)) continue;
+
+      if ((await lstat(itemPath)).isDirectory()) {
+        await this.investigate(itemPath);
+        continue;
       }
+
+      if (await isBinaryFile(itemPath)) continue;
+
+      await this.fileService.append(
+        join(DIST_PATH, this.params.output),
+        this.params.encoding,
+        await this.getFileContent(itemPath)
+      );
     }
   }
 

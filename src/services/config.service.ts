@@ -71,7 +71,8 @@ export default class ConfigService implements IConfigService {
     return commentParams
       ? {
           enabled: commentParams.enabled || donor.enabled,
-          mark: commentParams.mark || donor.mark,
+          start: commentParams.start || donor.start,
+          end: commentParams.end || donor.end,
         }
       : donor;
   }

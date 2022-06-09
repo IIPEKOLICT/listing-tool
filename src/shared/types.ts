@@ -5,7 +5,8 @@ export type SearchParams = {
 
 export type CommentParams = {
   enabled: boolean;
-  mark: string;
+  start: string;
+  end: string;
 };
 
 export type PartialSearchParams = Partial<SearchParams>;

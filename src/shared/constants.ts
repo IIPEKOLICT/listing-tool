@@ -2,11 +2,12 @@ import { ListingParams } from './types';
 import { join } from 'path';
 
 export const DEFAULT_LISTING_PARAMS: ListingParams = {
-  root: '~/github',
+  root: '/home/iipekolict/github',
   output: 'listing.txt',
   comment: {
     enabled: true,
-    mark: '// ',
+    start: '// ',
+    end: '',
   },
   paddings: 1,
   encoding: 'utf8',
